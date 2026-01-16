@@ -59,12 +59,25 @@ const displayHistory = function() {
   });
 }
 
-btn.addEventListener('click', function() {
+function handleSearch(){
   const country = searchInput.value;
   if (country) {
     displayCountry(country);
   }
-}); 
+}
+
+function handleSearch(event){
+  const country = searchInput.value;
+  if (country) {
+    displayCountry(country);
+  }
+}
+btn.addEventListener('click', handleSearch);
+searchInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    handleSearch();
+  }
+});
 
 const searchButton = document.getElementById('searchInput');
 const button = document.getElementById('button');
