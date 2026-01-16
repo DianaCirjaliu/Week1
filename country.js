@@ -3,6 +3,10 @@
 const btn = document.querySelector('#button');
 const searchInput = document.querySelector('#searchInput');
 const countriesContainer = document.querySelector('.countries');
+const historyContainer = document.querySelector('.historyContainer');
+
+let searchedCountries = JSON.parse(localStorage.getItem('searchedCountries')) || [];
+
 
 const renderCountry = function (data, className = '') {
   const html = `
@@ -25,18 +29,44 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
-const displyCountry = function (country) { 
+
+const displayCountry = function (country) { 
     fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(response => response.json())
     .then(data => renderCountry(data[0]));
+
+    if (!searchedCountries.includes(country)) {
+       searchedCountries.unshift(country)
+
+      if (searchedCountries.length > 10) {
+        searchedCountries.pop();
+      }
+
+     ;
+      localStorage.setItem('searchedCountries', JSON.stringify(searchedCountries));
+      displayHistory();
+    }
+
 };
+
+const displayHistory = function() {
+  historyContainer.innerHTML = '';
+  searchedCountries.forEach(country => {
+    const html = `
+    <div class="small-button">${country}</div>
+    `;
+    historyContainer.insertAdjacentHTML('beforeend', html);
+  });
+}
 
 btn.addEventListener('click', function() {
   const country = searchInput.value;
   if (country) {
-    displyCountry(country);
+    displayCountry(country);
   }
 }); 
 
 const searchButton = document.getElementById('searchInput');
 const button = document.getElementById('button');
+
+
