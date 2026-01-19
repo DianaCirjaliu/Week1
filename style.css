@@ -164,12 +164,21 @@ body {
   background-clip: text;
 }
 
+.historyContainer {
+  display: flex;
+  justify-content: center;     
+  align-items: center;
+  gap: 10px;                     
+  width: 100%;                   
+}
+
+
 .small-button {
     background: linear-gradient(to right, rgb(241, 112, 200), rgb(218, 112, 214));
     border: none;
     color: white;
     padding: 10px 16px;
-   text-align: right;
+    text-align: right;
    text-decoration: none;
    display: inline-block;
    font-size: 15px;
@@ -181,15 +190,30 @@ body {
    margin-bottom: 10px;
 }
 
-
-.historyContainer {
-  display: flex;
-  justify-content: center;     
-  align-items: center;
-  gap: 10px;                     
-  width: 100%;                   
+.small-button:hover{
+  filter: drop-shadow(0 0 4px rgba(241,112,200,.6));
 }
 
 
+/* butonul mic de stea */
+.fav-btn {
+  margin-left: 8px;
+  font-size: 2.2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transform: translateY(-2px);
+  margin-left: auto;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: auto;
+}
 
+.fav-btn.active{
+  color: black;
+}
 
+.fav-btn:hover {
+  filter: drop-shadow(0 0 4px rgba(241,112,200,.6));
+}
